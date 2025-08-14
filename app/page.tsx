@@ -10,14 +10,12 @@ export default function Home() {
   const cartActions = useCart();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen text-rose-900">
       <div className="container mx-auto p-8 max-w-7xl">
         <div className="flex flex-col lg:flex-row gap-8">
           <main className="flex-1">
             <div className="mb-8">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                Desserts
-              </h1>
+              <h1 className="text-4xl font-bold mb-2">Desserts</h1>
             </div>
             <ProductList
               addToCart={cartActions.addToCart}
@@ -27,8 +25,8 @@ export default function Home() {
             />
           </main>
 
-          <aside className="w-full lg:w-96 lg:sticky lg:top-8 lg:h-fit">
-            <div className="bg-white rounded-lg shadow-sm border">
+          <aside className="w-full lg:w-80 lg:sticky lg:top-8 lg:h-fit">
+            <div className="bg-rose-50 rounded-lg">
               <CartCard
                 cart={cartActions.cart}
                 getTotalPrice={cartActions.getTotalPrice}

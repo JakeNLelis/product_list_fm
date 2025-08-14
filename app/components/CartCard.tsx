@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { CartItem } from "../types";
-import { Button, QuantityControl } from "./ui/Button";
-
+import { Button } from "./ui/Button";
+import { RemoveIcon } from "./ui/Icons";
+import carbonNeutral from "../../public/images/icon-carbon-neutral.svg";
 interface CartCardProps {
   cart: CartItem[];
   getTotalPrice: () => number;
@@ -10,16 +11,11 @@ interface CartCardProps {
   updateQuantity: (productName: string, quantity: number) => void;
 }
 
-function CartCard({
-  cart,
-  getTotalPrice,
-  removeFromCart,
-  updateQuantity,
-}: CartCardProps) {
+function CartCard({ cart, getTotalPrice, removeFromCart }: CartCardProps) {
   const totalPrice = getTotalPrice();
 
   return (
-    <div className="p-4">
+    <div className="p-4 text-scarlet">
       <h1 className="text-xl font-bold mb-4">Your Cart ({cart.length})</h1>
 
       {cart.length === 0 ? (
@@ -31,7 +27,9 @@ function CartCard({
             height={80}
             className="mx-auto mb-4"
           />
-          <p className="text-gray-500">Your added items will appear here</p>
+          <p className="text-sm text-rose-800">
+            Your added items will appear here
+          </p>
         </div>
       ) : (
         <>
@@ -39,49 +37,55 @@ function CartCard({
             {cart.map((item) => (
               <li
                 key={item.name}
-                className="flex items-center gap-2 p-2 border-b"
+                className="flex items-center gap-2 p-2 border-b border-rose-100"
               >
-                <Image
-                  src={item.image.thumbnail}
-                  alt={item.name}
-                  width={40}
-                  height={40}
-                  className="rounded"
-                />
                 <div className="flex-1">
-                  <div className="font-semibold text-sm">{item.name}</div>
-                  <div className="text-sm text-gray-600">
-                    ${item.price.toFixed(2)} x {item.quantity}
+                  <div className="font-semibold text-sm text-rose-900 mb-1">
+                    {item.name}
                   </div>
-                  <div className="text-sm font-bold">
-                    ${(item.price * item.quantity).toFixed(2)}
+                  <div className="flex gap-2 text-sm text-rose-500">
+                    <span className="font-semibold mr-0.5 text-rose-700">
+                      {item.quantity}x
+                    </span>{" "}
+                    <span>@ ${item.price.toFixed(2)}</span>{" "}
+                    <span className="font-semibold ">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </span>
                   </div>
                 </div>
-                <QuantityControl
-                  quantity={item.quantity}
-                  onIncrease={() =>
-                    updateQuantity(item.name, item.quantity + 1)
-                  }
-                  onDecrease={() =>
-                    updateQuantity(item.name, item.quantity - 1)
-                  }
-                  onRemove={() => removeFromCart(item.name)}
-                  productName={item.name}
-                />
+                <Button
+                  className="border-1 rounded-full p-1 border-rose-400 text-rose-400 hover:text-rose-800 hover:border-rose-800 hover:cursor-pointer"
+                  onClick={() => removeFromCart(item.name)}
+                >
+                  <RemoveIcon className="" width={8} height={8} />
+                </Button>
               </li>
             ))}
           </ul>
 
-          <div className="border-t pt-4">
+          <div className="py-4 text-rose-900">
             <div className="flex justify-between items-center mb-4">
-              <span className="font-bold text-lg">
-                Total: ${totalPrice.toFixed(2)}
+              <span className="text-sm">Order Total</span>
+              <span className="text-lg font-bold">
+                ${totalPrice.toFixed(2)}
               </span>
+            </div>
+
+            <div className="flex items-center gap-2 justify-center py-3 mb-4 bg-rose-100 rounded-md">
+              <Image
+                src={carbonNeutral}
+                alt="Carbon Neutral"
+                width={16}
+                height={16}
+              />
+              <p className="text-sm">
+                This is a <b>carbon-neutral</b> delivery
+              </p>
             </div>
 
             <Button
               onClick={() => alert("Order confirmed!")}
-              className="w-full bg-green-600 hover:bg-green-700"
+              className="w-full text-rose-50 py-4 rounded-full bg-scarlet hover:bg-rose-800"
               size="lg"
             >
               Confirm Order
