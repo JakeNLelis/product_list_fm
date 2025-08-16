@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { CartItem } from "../types";
 import { Button } from "./ui/Button";
 import { RemoveIcon } from "./ui/Icons";
+import { OrderConfirmationModal } from "./ui/OrderConfirmationModal";
 import carbonNeutral from "../../public/images/icon-carbon-neutral.svg";
+
 interface CartCardProps {
   cart: CartItem[];
   getTotalPrice: () => number;
   removeFromCart: (productName: string) => void;
   updateQuantity: (productName: string, quantity: number) => void;
+  clearCart: () => void;
 }
 
-function CartCard({ cart, getTotalPrice, removeFromCart }: CartCardProps) {
+function CartCard({
+  cart,
+  getTotalPrice,
+  removeFromCart,
+  clearCart,
+}: CartCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const totalPrice = getTotalPrice();
+
+  const handleConfirmOrder = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleStartNewOrder = () => {
+    clearCart();
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="p-4 text-scarlet">
@@ -84,7 +102,7 @@ function CartCard({ cart, getTotalPrice, removeFromCart }: CartCardProps) {
             </div>
 
             <Button
-              onClick={() => alert("Order confirmed!")}
+              onClick={handleConfirmOrder}
               className="w-full text-rose-50 py-4 rounded-full bg-scarlet hover:bg-rose-800"
               size="lg"
             >
@@ -93,6 +111,13 @@ function CartCard({ cart, getTotalPrice, removeFromCart }: CartCardProps) {
           </div>
         </>
       )}
+
+      <OrderConfirmationModal
+        isOpen={isModalOpen}
+        cart={cart}
+        totalPrice={totalPrice}
+        onStartNewOrder={handleStartNewOrder}
+      />
     </div>
   );
 }

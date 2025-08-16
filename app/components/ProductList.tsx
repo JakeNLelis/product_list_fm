@@ -33,7 +33,7 @@ function ProductList({
                   alt={product.name}
                   width={250}
                   height={250}
-                  className={`rounded-lg border border-rose-100 ${
+                  className={`rounded-lg border-2 border-rose-100 ${
                     productInCart ? "border-scarlet" : ""
                   }`}
                 />

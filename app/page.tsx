@@ -32,6 +32,7 @@ export default function Home() {
                 getTotalPrice={cartActions.getTotalPrice}
                 removeFromCart={cartActions.removeFromCart}
                 updateQuantity={cartActions.updateQuantity}
+                clearCart={cartActions.clearCart}
               />
             </div>
           </aside>
