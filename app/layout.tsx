@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   title: "Dessert Shop - Product List",
   description:
     "Browse and order delicious desserts from our curated collection",
+  icons: {
+    icon: [
+      {
+        url: "/images/favicon-32x32.png",
+        href: "/images/favicon-32x32.png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
