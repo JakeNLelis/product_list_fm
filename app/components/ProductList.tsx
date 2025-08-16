@@ -21,19 +21,19 @@ function ProductList({
 }: ProductListProps) {
   return (
     <div className="w-full">
-      <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+      <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-items-center">
         {products.map((product, idx) => {
           const productInCart = isInCart(product.name);
 
           return (
-            <div key={product.name + idx}>
-              <div className="relative mb-3 w-max">
+            <div key={product.name + idx} className="w-full max-w-[360px]">
+              <div className="relative mb-3 w-full">
                 <Image
                   src={product.image?.desktop}
                   alt={product.name}
                   width={250}
                   height={250}
-                  className={`rounded-lg border-2 border-rose-100 ${
+                  className={`rounded-lg border-2 border-rose-100 w-full h-auto aspect-[5/4] md:aspect-square object-cover ${
                     productInCart ? "border-scarlet" : ""
                   }`}
                 />

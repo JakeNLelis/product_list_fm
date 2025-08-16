@@ -21,8 +21,8 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50">
+      <div className="bg-white w-full sm:max-w-md sm:rounded-lg rounded-t-2xl sm:rounded-t-lg max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="mb-6">
             <Image
@@ -32,7 +32,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
               height={42}
               className="mb-4"
             />
-            <h2 className="text-3xl font-bold text-rose-900 mb-2">
+            <h2 className="text-4xl font-bold text-rose-900 mb-2">
               Order Confirmed
             </h2>
             <p className="text-rose-500 text-sm">
